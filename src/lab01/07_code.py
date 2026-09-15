@@ -13,7 +13,7 @@ for i in range(first,len(inn)):
         break
 step=second-first
 last_ind=0
-for i in range(second,len(inn)):
+for i in range(second,len(inn)): 
     if inn[i]==".":
         last_ind=i
         break
