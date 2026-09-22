@@ -1,4 +1,7 @@
 def format_record(rec: tuple[str, str, float]) -> str:
+    """перезаписывает данные студента по форме
+    ("Иванов Иван Иванович", "BIVT-25", 4.6) → "Иванов И.И., гр. BIVT-25, GPA 4.60"
+    """
     fio,group,gpa = rec
     if len(fio.strip())==0:
         raise ValueError("Пустое имя")
@@ -8,6 +11,8 @@ def format_record(rec: tuple[str, str, float]) -> str:
         raise ValueError("Пустая группа")
     if not isinstance(group, str):
                 raise TypeError("Неверный тип группы")
+    if not gpa:
+        raise ValueError("Пустой GPA")
     if not isinstance(gpa, float):
         raise TypeError("Неверный тип GPA")
 

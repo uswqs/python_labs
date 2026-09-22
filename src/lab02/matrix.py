@@ -1,4 +1,7 @@
 def transpose(mat: list[list[float | int]]) -> list[list]:  
+    """меняет строки и столбцы местами
+    [[1, 2, 3]] → [[1], [2], [3]]
+    """
     if len(mat)==0:
         return []
     num_rows=len(mat)
@@ -23,6 +26,9 @@ if __name__=="__main__":
 
 
 def row_sums(mat: list[list[float | int]]) -> list[float]:
+    """Сумма по каждой строке
+    [[1, 2, 3], [4, 5, 6]] → [6, 15]
+    """
     num_columns=len(mat[0])
     result=[]
     for row in mat:
@@ -39,6 +45,9 @@ if __name__=="__main__":
 
 
 def col_sums(mat: list[list[float | int]]) -> list[float]:
+    """Сумма по каждому столбцу
+    [[1, 2, 3], [4, 5, 6]] → [5, 7, 9]
+    """
     num_columns=len(mat[0])
     result=[0]*num_columns
     for row in mat:

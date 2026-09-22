@@ -1,4 +1,7 @@
 def min_max(nums: list[float | int]) -> tuple[float | int, float | int]:
+    """кортеж из минимального и максимального чисел
+    [3,-1,5,5,0] → (-1,5)
+    """
     if len(nums)==0:
         raise ValueError("Список пуст")
     return (min(nums), max(nums))
@@ -12,6 +15,9 @@ if __name__=="__main__":
 
 
 def unique_sorted(nums: list[float | int]) -> list[float | int]:
+    """отсортированный список уникальных значений (по возрастанию)
+    [3, 1, 2, 1, 3] → [1, 2, 3]
+    """
     return sorted(set(nums))
 
 if __name__=="__main__":
@@ -22,6 +28,9 @@ if __name__=="__main__":
 
 
 def flatten(mat: list[list | tuple]) -> list:
+    """«расплющивает» список списков/кортежей в один список по строкам
+    [[1, 2], (3, 4, 5)] → [1, 2, 3, 4, 5]
+    """
     result=[]
     for row in mat:
         if isinstance(row, str):
