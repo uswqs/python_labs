@@ -4,7 +4,14 @@ def min_max(nums: list[float | int]) -> tuple[float | int, float | int]:
     """
     if len(nums)==0:
         raise ValueError("Список пуст")
-    return (min(nums), max(nums))
+    minimum=10**12
+    maximum=-10**12
+    for x in nums:
+        if x<minimum:
+            minimum=x
+        if x>maximum:
+            maximum=x
+    return (minimum, maximum)
 
 if __name__=="__main__":
     print(min_max([3,-1,5,5,0]))
@@ -18,7 +25,16 @@ def unique_sorted(nums: list[float | int]) -> list[float | int]:
     """отсортированный список уникальных значений (по возрастанию)
     [3, 1, 2, 1, 3] → [1, 2, 3]
     """
-    return sorted(set(nums))
+    unique_nums=list(set(nums))
+    result=[]
+    for x in unique_nums:
+        index=len(result)
+        for ind in range(len(result)):
+            if result[ind]>x:
+                index=ind
+                break
+        result.insert(index,x)
+    return result
 
 if __name__=="__main__":
     print(unique_sorted([3, 1, 2, 1, 3]))
