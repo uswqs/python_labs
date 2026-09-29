@@ -183,7 +183,12 @@ def format_record(rec: tuple[str, str, float]) -> str:
     """перезаписывает данные студента по форме
     ("Иванов Иван Иванович", "BIVT-25", 4.6) → "Иванов И.И., гр. BIVT-25, GPA 4.60"
     """
-    fio,group,gpa = rec
+    if len(rec)==3:
+        fio,group,gpa = rec
+    else:
+        raise ValueError("Неверно введены данные")
+    if not isinstance(rec,tuple):
+        raise TypeError("На входе должен быть кортеж")
     if len(fio.strip())==0:
         raise ValueError("Пустое имя")
     if not isinstance(fio, str):
