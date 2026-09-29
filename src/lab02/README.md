@@ -187,15 +187,17 @@ def format_record(rec: tuple[str, str, float]) -> str:
     if len(fio.strip())==0:
         raise ValueError("Пустое имя")
     if not isinstance(fio, str):
-            raise TypeError("Неверный тип ФИО")
+        raise TypeError("Неверный тип ФИО")
     if len(group)==0:
         raise ValueError("Пустая группа")
     if not isinstance(group, str):
-                raise TypeError("Неверный тип группы")
+        raise TypeError("Неверный тип группы")
     if not gpa:
         raise ValueError("Пустой GPA")
     if not isinstance(gpa, float):
         raise TypeError("Неверный тип GPA")
+    if not 0.0<=gpa<=5.0:
+        raise ValueError("Неправильное значение: должно быть 0.0<=GPA<=5.0")
 
     fio_new=""
 

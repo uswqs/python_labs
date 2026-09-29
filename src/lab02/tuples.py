@@ -15,6 +15,8 @@ def format_record(rec: tuple[str, str, float]) -> str:
         raise ValueError("Пустой GPA")
     if not isinstance(gpa, float):
         raise TypeError("Неверный тип GPA")
+    if not 0.0<=gpa<=5.0:
+        raise ValueError("Неправильное значение: должно быть 0.0<=GPA<=5.0")
 
     fio_new=""
 
