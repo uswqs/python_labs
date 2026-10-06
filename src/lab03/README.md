@@ -21,4 +21,6 @@ def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
     norm_s=" ".join(s.split())
     return norm_s
 ```
+![](https://github.com/uswqs/python_labs/blob/main/images/lab03/normalize.png?raw=true) 
 
+### tokenize

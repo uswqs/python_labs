@@ -36,11 +36,11 @@ def tokenize(text: str) -> list[str]:
     result=normalize(text)
     return re.findall(r"\w+(?:-\w+)*",result)
 
-# print(tokenize("привет мир"))
-# print(tokenize("hello,world!!!"))
-# print(tokenize("по-настоящему круто"))
-# print(tokenize("2025 год"))
-# print(tokenize("emoji 😀 не слово"))
+print(tokenize("привет мир"))
+print(tokenize("hello,world!!!"))
+print(tokenize("по-настоящему круто"))
+print(tokenize("2025 год"))
+print(tokenize("emoji 😀 не слово"))
 
 
 def count_freq(tokens: list[str]) -> dict[str, int]:
