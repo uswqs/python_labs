@@ -1,6 +1,8 @@
-from src.lab03.text.py import normalize
+from src.lib.text import normalize, tokenize, count_freq, top_n
+text=input()
 
-print(normalize("ПрИвЕт\nМИр\t"))
-print(normalize("ёжик, Ёлка"))
-print(normalize("Hello\r\nWorld"))
-print(normalize("  двойные   пробелы  "))
+normal_text=normalize(text)
+token_text=tokenize(normal_text)
+freq_text=count_freq(token_text)
+top_text=top_n(freq__text)
+print(normal_text,token_text,freq_text,top_text)
