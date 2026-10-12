@@ -7,7 +7,7 @@ def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
 
     "ёжик, Ёлка" (yo2e=True) → "ежик, елка"
 
-    "ПрИвЕт\nМИр\t" → "привет мир""""
+    "ПрИвЕт\nМИр\t" → "привет мир"""
     s=""
     if casefold==True:
         s=text.casefold()
@@ -29,6 +29,7 @@ print(normalize("  двойные   пробелы  "))
 ```
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab03/normalize.png?raw=true) 
 
+---
 
 ### tokenize
 ``` python
@@ -54,6 +55,7 @@ print(tokenize("emoji 😀 не слово"))
 ```
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab03/tokenize.png?raw=true) 
 
+---
 ### count_freq
 ```python
 def count_freq(tokens: list[str]) -> dict[str, int]:
@@ -71,7 +73,7 @@ def count_freq(tokens: list[str]) -> dict[str, int]:
 print(count_freq(["a","b","a","c","b","a"]))
 print(count_freq(["bb","aa","bb","aa","cc"]))
 ```
-
+---
 ### top_n
 ``` python
 def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
@@ -87,7 +89,7 @@ def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
 print(top_n({'a': 3, 'b': 2, 'c': 1}))
 print(top_n({'bb': 2, 'aa': 2, 'cc': 1}))
 ```
-
+---
 
 ## Задание B — src/text_stats.py (скрипт со stdin)
 
@@ -107,15 +109,14 @@ for x in range(len(top_text)):
     print(f"{top_text[x][0]}:{top_text[x][1]}")
 ```
 
-тест-кейс
+Для запуска в терминале нужно в ручную ввести, затем вводить текст
+``` python
+python -m src.lab03.text_stats
+```
+
+Тест-кейсы
 ```python
 "Привет, мир! Привет!!!"
 ```
 
-![]()
-
-Для запуска в терминале в ручную ввести
-``` python
-python -m src.lab03.text_stats
-```
-    
+![](https://github.com/uswqs/python_labs/blob/main/images/lab03/text_stats.jpg?raw=true)    
