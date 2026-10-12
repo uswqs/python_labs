@@ -89,7 +89,7 @@ print(top_n({'bb': 2, 'aa': 2, 'cc': 1}))
 ```
 
 
-## Задание B — src/text_stats.py
+## Задание B — src/text_stats.py (скрипт со stdin)
 
 ```python
 from src.lib.text import normalize, tokenize, count_freq, top_n
@@ -98,11 +98,24 @@ text=input()
 normal_text=normalize(text)
 token_text=tokenize(normal_text)
 freq_text=count_freq(token_text)
-top_text=top_n(freq__text)
+top_text=top_n(freq_text)
 
 print(f"Всего слов: {len(token_text)}")
 print(f"Уникальных слов: {len(freq_text)}")
 print(f"Топ-5:")
 for x in range(len(top_text)):
-    print(f"{top_text[x][0]}:{top_text[x][1]}")```
+    print(f"{top_text[x][0]}:{top_text[x][1]}")
+```
+
+тест-кейс
+```python
+"Привет, мир! Привет!!!"
+```
+
+![]()
+
+Для запуска в терминале в ручную ввести
+``` python
+python -m src.lab03.text_stats
+```
     

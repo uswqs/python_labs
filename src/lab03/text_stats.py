@@ -4,7 +4,7 @@ text=input()
 normal_text=normalize(text)
 token_text=tokenize(normal_text)
 freq_text=count_freq(token_text)
-top_text=top_n(freq__text)
+top_text=top_n(freq_text)
 
 print(f"Всего слов: {len(token_text)}")
 print(f"Уникальных слов: {len(freq_text)}")
