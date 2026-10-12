@@ -73,6 +73,7 @@ def count_freq(tokens: list[str]) -> dict[str, int]:
 print(count_freq(["a","b","a","c","b","a"]))
 print(count_freq(["bb","aa","bb","aa","cc"]))
 ```
+![](https://github.com/uswqs/python_labs/blob/main/images/lab03/count_freq.jpg?raw=true)
 ---
 ### top_n
 ``` python
@@ -89,6 +90,7 @@ def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
 print(top_n({'a': 3, 'b': 2, 'c': 1}))
 print(top_n({'bb': 2, 'aa': 2, 'cc': 1}))
 ```
+![](https://github.com/uswqs/python_labs/blob/main/images/lab03/top_n.jpg?raw=true)
 ---
 
 ## Задание B — src/text_stats.py (скрипт со stdin)
