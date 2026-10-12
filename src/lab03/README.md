@@ -111,10 +111,7 @@ for x in range(len(top_text)):
     print(f"{top_text[x][0]}:{top_text[x][1]}")
 ```
 
-Для запуска в терминале нужно в ручную ввести, затем вводить текст
-``` python
-python -m src.lab03.text_stats
-```
+*Для запуска в терминале нужно в ручную ввести `python -m src.lab03.text_stats`, затем вводить текст
 
 Тест-кейсы
 ```python
