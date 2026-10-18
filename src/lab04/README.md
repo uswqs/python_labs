@@ -1,7 +1,11 @@
 # ЛР4 — Файлы: TXT/CSV и отчёты по текстовой статистике
 ## Задание A — модуль src/lab04/io_txt_csv.py
 ### read_text
+Функция читает весь текст файла и возвращает одной строкой.
 
+По умолчанию стоит кодировка utf-8. Чтобы изменить, нужно прописать при вызове (пример: read_text("text.txt", encoding="cp1251") )
+
+Падает на ошибках FileNotFoundError (файла не существует) и UnicodeDecodeError (неверная кодировка)
 ```python
 from pathlib import Path
 
@@ -20,17 +24,25 @@ def read_text(path: str | Path, encoding: str = "utf-8") -> str:
     return p.read_text(encoding=encoding)
 ```
 -------
+### ensure_parent_dir
+Cоздает родительские директории, если их нет
+```python
+def ensure_parent_dir(path: str | Path) -> None:
+    p=Path(path)
+    p.parent.mkdir(parents=True, exist_ok=True)
+```
+---
+
 ### write_csv
+Функция принимает список из строк таблицы, путь, где создаст csv, и заголовок таблицы (если есть); проверяет прямоугольность таблицы; перезаписывает строки в csv (если есть заголовок, пишет его первой строкой)
 ``` python
 from pathlib import Path
-import csv
-from typing import Iterable, Sequence
-from collections import Counter    
+import csv  
     
 def write_csv(rows: list[tuple | list], path: str | Path, header: tuple[str, ...] | None = None) -> None:
     """
     Перезаписывает csv с разделителем ",". 
-    Если есть строка заголовков таблицы (header), записывает ее первой строкой
+    Если есть заголовок таблицы (header), записывает его первой строкой
     
     Ошибки:
         ValueError: строки разной длины
@@ -39,16 +51,15 @@ def write_csv(rows: list[tuple | list], path: str | Path, header: tuple[str, ...
     rows = list(rows)
 
     if len(rows)>0:
-        if header is not None:
-            if len(header)!=len(rows[0]):
-                raise ValueError("header другой длины")
+        if header is not None and len(header)!=len(rows[0]):
+            raise ValueError("header другой длины")
         for x in rows:
             if len(x)!=len(rows[0]):
                 raise ValueError("строки разной длины")
 
-    p.parent.mkdir(parents=True, exist_ok=True)
+    ensure_parent_dir(p)
     
-    with p.open("w", newline="", encoding="utf-8") as f:
+    with open(p, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         if header is not None:
             w.writerow(header)
@@ -78,19 +89,27 @@ if __name__ == "__main__":
 
 ## Задание B — скрипт src/lab04/text_report.py
 ### text_report
+Функция читает текст (если файла нет, пишет `файл не найден` и прекращается,); с помощью функций `normalize, tokenize, count_freq, top_n` из лаб3 обрабатывает текст и выводит в консоль кол-во всех слов, уникальных слов и топ-5; создает таблицу в csv с колонками `word,count` со всеми словами текста (count ↓, слово ↑ (при равенстве))
 ```python
-from pathlib import Path
+import sys
 from src.lib.text import normalize, tokenize, count_freq, top_n
 from src.lab04.io_txt_csv import read_text, write_csv
-input_text="data/lab04/input.txt"
+INPUT_TEXT="data/lab04/input.txt"
 
 def text_report():
-    text=read_text(input_text, encoding="utf-8")
+    try:
+        text=read_text(INPUT_TEXT, encoding="utf-8")
+    except FileNotFoundError:
+        print("файл не найден")
+        sys.exit(1)
+    except UnicodeDecodeError:
+        print("неверная кодировка")
+        sys.exit(1)
 
     norm_text=normalize(text)
     token=tokenize(norm_text)
     freq=count_freq(token)
-    top_5=top_n(freq)
+    top_5=top_n(freq,5)
 
     print(f"Всего слов: {len(token)}")
     print(f"Уникальных слов: {len(freq)}")
@@ -99,7 +118,7 @@ def text_report():
         print(f"{word}:{count}")
     
     top=sorted(freq.items(),key=lambda p: (-p[1],p[0]))
-    write_csv(top, "data/lab04/report.csv", header=["word","count"])
+    write_csv(top, "data/lab04/report.csv", header=("word","count"))
 
 if __name__=="__main__":
     text_report()
@@ -115,5 +134,5 @@ if __name__=="__main__":
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab04/2_empty_csv.jpg?raw=true)
 
 Если файл отсутствует:
-![](https://github.com/uswqs/python_labs/blob/main/images/lab04/1_no_fail.jpg?raw=true)
+![](https://github.com/uswqs/python_labs/blob/main/images/lab04/2_no_fail.jpg?raw=true)
 

@@ -1,5 +1,4 @@
 from pathlib import Path
-
 def read_text(path: str | Path, encoding: str = "utf-8") -> str:
     """
     Возвращает весь текст файла в одну строку.
@@ -15,32 +14,34 @@ def read_text(path: str | Path, encoding: str = "utf-8") -> str:
     return p.read_text(encoding=encoding)
 
 
-import csv
-from typing import Iterable, Sequence
-from collections import Counter    
-    
+def ensure_parent_dir(path: str | Path) -> None:
+    p=Path(path)
+    p.parent.mkdir(parents=True, exist_ok=True)
+
+
+import csv 
 def write_csv(rows: list[tuple | list], path: str | Path, header: tuple[str, ...] | None = None) -> None:
     """
     Перезаписывает csv с разделителем ",". 
-    Если есть строка заголовков таблицы (header), записывает ее первой строкой
+    Если есть заголовок таблицы (header), записывает его первой строкой
     
     Ошибки:
         ValueError: строки разной длины
     """
+
     p = Path(path)
     rows = list(rows)
 
     if len(rows)>0:
-        if header is not None:
-            if len(header)!=len(rows[0]):
-                raise ValueError("header другой длины")
+        if header is not None and len(header)!=len(rows[0]):
+            raise ValueError("header другой длины")
         for x in rows:
             if len(x)!=len(rows[0]):
                 raise ValueError("строки разной длины")
 
-    p.parent.mkdir(parents=True, exist_ok=True)
+    ensure_parent_dir(p)
     
-    with p.open("w", newline="", encoding="utf-8") as f:
+    with open(p, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         if header is not None:
             w.writerow(header)
