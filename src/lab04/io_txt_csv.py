@@ -12,6 +12,12 @@ def read_text(path: str | Path, encoding: str = "utf-8") -> str:
     """
     p = Path(path)
     # FileNotFoundError и UnicodeDecodeError пусть «всплывают» — это нормально
+    try:
+        p = Path(path)
+    except FileNotFoundError:
+        print("файл не найден")
+        sys.exit(1)
+
     return p.read_text(encoding=encoding)
 
 
@@ -49,6 +55,6 @@ def write_csv(rows: list[tuple | list], path: str | Path, header: tuple[str, ...
 
 from src.lab04.io_txt_csv import read_text, write_csv
 if __name__ == "__main__":
-    txt = read_text("data/lab04/input1.txt")  
+    txt = read_text("data/lab04/input.txt")  
     print(txt) # возвращает строку
     write_csv([("word","count"),("test",3)], "data/lab04/check.csv")  # создает CSV
