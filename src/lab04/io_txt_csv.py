@@ -12,12 +12,6 @@ def read_text(path: str | Path, encoding: str = "utf-8") -> str:
     """
     p = Path(path)
     # FileNotFoundError и UnicodeDecodeError пусть «всплывают» — это нормально
-    try:
-        p = Path(path)
-    except FileNotFoundError:
-        print("файл не найден")
-        sys.exit(1)
-
     return p.read_text(encoding=encoding)
 
 

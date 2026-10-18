@@ -1,10 +1,15 @@
+import sys
 from pathlib import Path
 from src.lib.text import normalize, tokenize, count_freq, top_n
 from src.lab04.io_txt_csv import read_text, write_csv
-input_text="data/lab04/input.txt"
+input_text="data/lab04/input1.txt"
 
 def text_report():
-    text=read_text(input_text, encoding="utf-8")
+    try:
+        text=read_text(input_text, encoding="utf-8")
+    except FileNotFoundError:
+        print("файл не найден")
+        sys.exit(1)
 
     norm_text=normalize(text)
     token=tokenize(norm_text)

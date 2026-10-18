@@ -1,6 +1,7 @@
 # ЛР4 — Файлы: TXT/CSV и отчёты по текстовой статистике
 ## Задание A — модуль src/lab04/io_txt_csv.py
 ### read_text
+
 ```python
 from pathlib import Path
 
@@ -16,12 +17,6 @@ def read_text(path: str | Path, encoding: str = "utf-8") -> str:
     """
     p = Path(path)
     # FileNotFoundError и UnicodeDecodeError пусть «всплывают» — это нормально
-    try:
-        p = Path(path)
-    except FileNotFoundError:
-        print("файл не найден")
-        sys.exit(1)
-
     return p.read_text(encoding=encoding)
 ```
 -------
@@ -74,10 +69,10 @@ if __name__ == "__main__":
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab04/1_write_csv.jpg?raw=true)
 
 Если в файле пусто:
-![](https://github.com/uswqs/python_labs/blob/main/images/lab04/пустая_строка.jpg?raw=true)
+![](https://github.com/uswqs/python_labs/blob/main/images/lab04/1_empty.jpg?raw=true)
 
 Если файл отсутствует:
-![](https://github.com/uswqs/python_labs/blob/main/images/lab04/нет_файла.jpg?raw=true)
+![](https://github.com/uswqs/python_labs/blob/main/images/lab04/1_no_fail.jpg?raw=true)
 
 ---
 
@@ -120,4 +115,5 @@ if __name__=="__main__":
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab04/2_empty_csv.jpg?raw=true)
 
 Если файл отсутствует:
-![]()
+![](https://github.com/uswqs/python_labs/blob/main/images/lab04/1_no_fail.jpg?raw=true)
+
