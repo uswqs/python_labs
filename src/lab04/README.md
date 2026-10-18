@@ -16,6 +16,12 @@ def read_text(path: str | Path, encoding: str = "utf-8") -> str:
     """
     p = Path(path)
     # FileNotFoundError и UnicodeDecodeError пусть «всплывают» — это нормально
+    try:
+        p = Path(path)
+    except FileNotFoundError:
+        print("файл не найден")
+        sys.exit(1)
+
     return p.read_text(encoding=encoding)
 ```
 -------
@@ -64,8 +70,8 @@ if __name__ == "__main__":
     write_csv([("word","count"),("test",3)], "data/lab04/check.csv")  # создает CSV
 ```
 Если в файле `"Привет, мир! Привет!!!"`:
-![](https://github.com/uswqs/python_labs/blob/main/images/lab04/read_text.jpg?raw=true)
-![](https://github.com/uswqs/python_labs/blob/main/images/lab04/write_csv.jpg?raw=true)
+![](https://github.com/uswqs/python_labs/blob/main/images/lab04/1_read_text.jpg?raw=true)
+![](https://github.com/uswqs/python_labs/blob/main/images/lab04/1_write_csv.jpg?raw=true)
 
 Если в файле пусто:
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab04/пустая_строка.jpg?raw=true)
@@ -106,10 +112,12 @@ if __name__=="__main__":
 
 ### Тесты
 Если в файле `"Привет, мир! Привет!!!"`:
-![]()
+![](https://github.com/uswqs/python_labs/blob/main/images/lab04/2_text_report.jpg?raw=true)
+![](https://github.com/uswqs/python_labs/blob/main/images/lab04/2_text_report_csv.jpg?raw=true)
 
 Если в файле пусто:
-![]()
+![](https://github.com/uswqs/python_labs/blob/main/images/lab04/2_empty.jpg?raw=true)
+![](https://github.com/uswqs/python_labs/blob/main/images/lab04/2_empty_csv.jpg?raw=true)
 
 Если файл отсутствует:
 ![]()
