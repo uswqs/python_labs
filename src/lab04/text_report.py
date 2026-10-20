@@ -2,10 +2,11 @@ import sys
 from src.lib.text import normalize, tokenize, count_freq, top_n
 from src.lab04.io_txt_csv import read_text, write_csv
 INPUT_TEXT="data/lab04/input.txt"
+ENCODING="utf-8"
 
 def text_report():
     try:
-        text=read_text(INPUT_TEXT, encoding="utf-8")
+        text=read_text(INPUT_TEXT, encoding=ENCODING)
     except FileNotFoundError:
         print("файл не найден")
         sys.exit(1)

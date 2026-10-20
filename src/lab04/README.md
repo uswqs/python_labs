@@ -89,16 +89,17 @@ if __name__ == "__main__":
 
 ## Задание B — скрипт src/lab04/text_report.py
 ### text_report
-Функция читает текст (если файла нет, пишет `файл не найден` и прекращается,); с помощью функций `normalize, tokenize, count_freq, top_n` из лаб3 обрабатывает текст и выводит в консоль кол-во всех слов, уникальных слов и топ-5; создает таблицу в csv с колонками `word,count` со всеми словами текста (count ↓, слово ↑ (при равенстве))
+Функция читает текст из файла `src/data/lab04/input.txt`(если файла нет, пишет `файл не найден` и прекращается); с помощью функций `normalize, tokenize, count_freq, top_n` из лаб3 обрабатывает текст и выводит в консоль кол-во всех слов, уникальных слов и топ-5; создает таблицу в csv с колонками `word,count` со всеми словами текста (count ↓, слово ↑ (при равенстве))
 ```python
 import sys
 from src.lib.text import normalize, tokenize, count_freq, top_n
 from src.lab04.io_txt_csv import read_text, write_csv
 INPUT_TEXT="data/lab04/input.txt"
+ENCODING="utf-8"
 
 def text_report():
     try:
-        text=read_text(INPUT_TEXT, encoding="utf-8")
+        text=read_text(INPUT_TEXT, encoding=ENCODING)
     except FileNotFoundError:
         print("файл не найден")
         sys.exit(1)
@@ -125,14 +126,17 @@ if __name__=="__main__":
 ```
 
 ### Тесты
+Для запуска программы ввести в терминале `python -m src.lab04.text_report`
+
 Если в файле `"Привет, мир! Привет!!!"`:
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab04/2_text_report.jpg?raw=true)
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab04/2_text_report_csv.jpg?raw=true)
 
-Если в файле пусто:
+Если в файле пусто, в консоль выводятся заголовки таблицы (при наличии заголовков), записывает в report.csv заголовки:
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab04/2_empty.jpg?raw=true)
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab04/2_empty_csv.jpg?raw=true)
 
-Если файл отсутствует:
+Если файл отсутствует, в консоль выводится сообщение `файл не найден`:
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab04/2_no_fail.jpg?raw=true)
 
+*Чтобы изменить кодировку, неодходмо ввести необходимую кодировку в str в переменную `ENCODING`
