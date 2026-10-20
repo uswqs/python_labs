@@ -79,10 +79,10 @@ if __name__ == "__main__":
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab04/1_read_text.jpg?raw=true)
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab04/1_write_csv.jpg?raw=true)
 
-Если в файле пусто:
+Если в файле пусто? в консоль выводится пустая строка:
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab04/1_empty.jpg?raw=true)
 
-Если файл отсутствует:
+Если файл отсутствует, всплывает ошибка FileNotFoundError:
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab04/1_no_fail.jpg?raw=true)
 
 ---
