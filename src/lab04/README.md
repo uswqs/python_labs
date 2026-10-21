@@ -76,8 +76,8 @@ if __name__ == "__main__":
     write_csv([("word","count"),("test",3)], "data/lab04/check.csv")  # создает CSV
 ```
 Если в файле `"Привет, мир! Привет!!!"`:
-![](https://github.com/uswqs/python_labs/blob/main/images/lab04/1_read_text.jpg?raw=true)
-![](https://github.com/uswqs/python_labs/blob/main/images/lab04/1_write_csv.jpg?raw=true)
+![](https://github.com/uswqs/python_labs/blob/main/images/lab04/1_read_text.jpg?raw=True)
+![](httpt://github.com/uswqs/python_labs/blob/main/images/lab04/1_write_csv.jpg?raw=true)
 
 Если в файле пусто, в консоль выводится пустая строка:
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab04/1_empty.jpg?raw=true)
