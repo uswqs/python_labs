@@ -26,7 +26,7 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
             print("Пустой JSON или неподдерживаемая структура")
             sys.exit(1)
         
-    if len(data) == 0:
+    if not data:
         raise ValueError("пустой json файл")
     if not isinstance(data,list):
         raise ValueError("неверный тип данных")
@@ -69,7 +69,7 @@ def csv_to_json(csv_path: str, json_path: str) -> None:
 
         data=list(reader)
 
-    if len(data) == 0:
+    if not data:
         raise ValueError("в CSV файле отсутствуют данные")
 
     ensure_parent_dir(json_file)
@@ -79,5 +79,5 @@ def csv_to_json(csv_path: str, json_path: str) -> None:
 
 
 if __name__=="__main__":
-    json_to_csv("data\samples\people.json","data\out\people_from_json.csv")
-    csv_to_json("data\samples\people.csv","data\out\people_from_csv.json")
+    json_to_csv("data\lab05\samples\people.json","data\lab05\out\people_from_json.csv")
+    csv_to_json("data\lab05\samples\people.csv","data\lab05\out\people_from_csv.json")
