@@ -67,6 +67,7 @@ python -m src.lab05.json_csv
 json_to_csv("data\samples\people.json","data\out\people_from_json.csv")
 ```
 **Вывод в `data.out.people_from_json.csv`**
+
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab05/people_from_json.jpg?raw=true)
 ____
 
