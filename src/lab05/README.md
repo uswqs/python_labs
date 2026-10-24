@@ -5,11 +5,6 @@
 ____
 ### Функция `json_to_csv`
 ``` python 
-from pathlib import Path
-import csv 
-import json
-from src.lib.io_helpers import ensure_parent_dir
-
 def json_to_csv(json_path: str, csv_path: str) -> None:
     """
     Преобразует JSON-файл в CSV.
@@ -59,7 +54,7 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
 4. Проверяет, что файл не пустой и все данные - словари
 5. С помощью функции `ensure_parent_dir` (из лр4) проверяет наличие родительских директорий (или создает их в случае необходимости)
 6. Создает словарь с заголовками, записывая названия всех ключей в порядке их появления
-7. Создает CSV (в кодировке UTF-8), первой записывает строку с заголовками, затем все строки файла
+7. Сохраняет в CSV (в кодировке UTF-8): первой записывает строку с заголовками, затем все строки файла
 
 *Если в одном из словарей отсутствует ключ, csv.DictWriter записывает в соответствующую ячейку пустое значение.
 
@@ -67,8 +62,70 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
 ``` 
 python -m src.lab05.json_csv
 ```
-**Запуск функции**
+**Вызов функции**
 ```
 json_to_csv("data\samples\people.json","data\out\people_from_json.csv")
 ```
+**Вывод в `data.out.people_from_json.csv`**
+![](https://github.com/uswqs/python_labs/blob/main/images/lab05/people_from_json.jpg?raw=true)
+____
+
+### Функция `csv_to_json`
+```python
+def csv_to_json(csv_path: str, json_path: str) -> None:
+    """
+    Преобразует CSV в JSON (список словарей).
+    Заголовок обязателен, значения сохраняются как строки.
+    json.dump(..., ensure_ascii=False, indent=2)
+    """
+    json_file = Path(json_path)
+    csv_file = Path(csv_path)
+
+    if not csv_file.exists():
+        raise FileNotFoundError("файл отсутствует")
+    if csv_file.suffix.lower() != ".csv":
+        raise ValueError("неверный тип файла, должен быть .csv")
+    if json_file.suffix.lower() != ".json":
+        raise ValueError("неверный тип файла, должен быть .json")
+
+    with open(csv_file, "r", encoding = "utf-8", newline = "") as f:
+        reader = csv.DictReader(f)
+        if reader.fieldnames is None:
+            raise ValueError("файл не содержит заголовок")
+
+        data=list(reader)
+
+    if len(data) == 0:
+        raise ValueError("в CSV файле отсутствуют данные")
+
+    ensure_parent_dir(json_file)
+
+    with open(json_file, "w", encoding = "utf-8") as f:
+        json.dump(data, f, ensure_ascii = False, indent = 2)
+```
+
+**Что делает:**
+1. Проверяет, есть ли файл
+2. Проверяет, правильный ли формат файлов
+3. Читает CSV файл 
+4. Проверяет, есть ли заголовок
+5. Создает список данных
+6. Проверяет, есть ли данные в файле 
+7. С помощью функции `ensure_parent_dir` (из лр4) проверяет наличие родительских директорий (или создает их в случае необходимости)
+8. Сохраняет в JSON (в кодировке UTF-8) список словарей
+
+*Благодаря `ensure_ascii=False` текст читаем для человека, а `indent=2` делает два отступа, чтобы было удобнее воспринимать информацию.
+
+**Запуск из терминала**
+``` 
+python -m src.lab05.json_csv
+```
+**Вызов функции**
+```
+csv_to_json("data\samples\people.csv","data\out\people_from_csv.json")
+```
+**Вывод в `data.out.people_from_csv.json`**
+
+![](https://github.com/uswqs/python_labs/blob/main/images/lab05/people_from_csv.jpg?raw=true)
+____
 
