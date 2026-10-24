@@ -66,7 +66,7 @@ python -m src.lab05.json_csv
 ```
 json_to_csv("data\lab05\samples\people.json","data\lab05\out\people_from_json.csv")
 ```
-**Вывод в `data.out.people_from_json.csv`**
+**Вывод в `data.lab05.out.people_from_json.csv`**
 
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab05/people_from_json.jpg?raw=true)
 ____
@@ -126,8 +126,84 @@ python -m src.lab05.json_csv
 csv_to_json("data\lab05\samples\people.csv","data\lab\05\out\people_from_csv.json")
 ```
 
-**Вывод в `data.out.people_from_csv.json`**
+**Вывод в `data.lab05.out.people_from_csv.json`**
 
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab05/people_from_csv.jpg?raw=true)
 ____
 
+## Задание B — CSV → XLSX
+- Модуль `src/lab05/csv_xlsx.py`
+- Функция `csv_to_xlsx`
+____
+### Функция `csv_to_xlsx`
+```python
+from pathlib import Path
+from openpyxl import Workbook
+from src.lib.io_helpers import ensure_parent_dir
+import csv
+
+def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
+    """
+    Конвертирует CSV в XLSX.
+    Использовать openpyxl ИЛИ xlsxwriter.
+    Первая строка CSV — заголовок.
+    Лист называется "Sheet1".
+    Колонки — автоширина по длине текста (не менее 8 символов).
+    """
+    csv_file=Path(csv_path)
+    xlsx_file=Path(xlsx_path)
+
+    if not csv_file.exists():
+        raise FileNotFoundError("файл отсутствует")
+    if csv_file.suffix.lower() != ".csv":
+        raise ValueError("неверный тип файла, должен быть .csv")
+    if xlsx_file.suffix.lower() != ".xlsx":
+        raise ValueError("неверный тип файла, должен быть .xlsx")
+
+    with open(csv_file, "r", encoding = "utf-8", newline = "") as f:
+        reader = list(csv.reader(f))
+
+    if not reader:
+        raise ValueError("файл CSV пустой")
+    
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Sheet1"
+    for row in reader:
+        ws.append(row)
+
+    for column in ws.columns:
+        max_len = 0
+        letter = column[0].column_letter
+
+        for cell in column:
+            if cell.value is not None and len(str(cell.value)) > max_len:
+                max_len = len(str(cell.value))
+
+        ws.column_dimensions[letter].width = max(max_len, 8)
+
+    ensure_parent_dir(xlsx_file)
+    wb.save(xlsx_file)
+```
+**Что делает:**
+1. Проверяет, есть ли файл
+2. Проверяет, правильный ли формат файлов
+3. Читает CSV файл 
+4. Создает книгу Excel с помощью openpyxl и лист Sheet1
+7. 
+С помощью функции `ensure_parent_dir` (из лр4) проверяет наличие родительских директорий (или создает их в случае необходимости)
+8. Сохраняет в JSON (в кодировке UTF-8) список словарей
+
+
+**Запуск из терминала**
+``` 
+python -m src.lab05.csv_xlsx
+```
+**Вызов функции**
+```
+csv_to_xlsx("data\lab05\samples\cities.csv","data\lab05\out\cities.xlsx")
+```
+
+**Вывод в `data.lab05.out.cities.xlsx`**
+
+![](https://github.com/uswqs/python_labs/blob/main/images/lab05/cities.jpg?raw=true)
