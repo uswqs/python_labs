@@ -54,14 +54,70 @@ def main():
 if __name__=="__main__":
     main()
 ```
+___
 **подкоманда cat**
 
 Аргументы: 
-- *--input* - входной файл
-- *-n* - требуется ли нумерация строк
+- *"--input"* - входной файл
+- *"-n"* - требуется ли нумерация строк
 
 Вызов в терминале:
 ```
 python -m src.lab06.cli_text cat --input data/lab06/samples/people.txt -n
 ```
 Вывод:
+![](https://github.com/uswqs/python_labs/blob/main/images/lab06/cli_text_cat.jpg?raw=true)
+___
+
+**подкоманда stats**
+
+Аргументы: 
+- *"--input"* - входной файл
+- *"--top"* - количество значений при выводе таблицы с частотами (по умолчанию - 5)
+
+Вызов в терминале:
+```
+python -m src.lab06.cli_text stats --input data/lab06/samples/people.txt --top 5
+```
+Вывод:
+![](https://github.com/uswqs/python_labs/blob/main/images/lab06/cli_text_stats.jpg?raw=true)
+___
+
+## Задание 2
+- Модуль `src/lab06/сli_convert.py`
+- Подкоманды `json2csv`, `csv2json` и `csv2xlsx`
+- Аргументы *"--in"* - входной файл, *"--out"*  - файл вывода
+```python
+import argparse
+from src.lab05.json_csv import json_to_csv, csv_to_json
+from src.lab05.csv_xlsx import csv_to_xlsx
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Конвертеры данных")
+    sub = parser.add_subparsers(dest="command")
+
+    p1 = sub.add_parser("json2csv")
+    p1.add_argument("--in", dest="input", required=True)
+    p1.add_argument("--out", dest="output", required=True)
+
+    p2 = sub.add_parser("csv2json")
+    p2.add_argument("--in", dest="input", required=True)
+    p2.add_argument("--out", dest="output", required=True)
+
+    p3 = sub.add_parser("csv2xlsx")
+    p3.add_argument("--in", dest="input", required=True)
+    p3.add_argument("--out", dest="output", required=True)
+
+    args = parser.parse_args()
+
+    if args.command == "json2csv":
+        json_to_csv(args.input, args.output)
+    elif args.command == "csv2json":
+        csv_to_json(args.input, args.output)
+    elif args.command == "csv2xlsx":
+        csv_to_xlsx(args.input, args.output)     
+
+if __name__=="__main__":
+    main()
+```
