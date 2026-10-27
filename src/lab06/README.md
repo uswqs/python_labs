@@ -80,7 +80,11 @@ ___
 python -m src.lab06.cli_text stats --input data/lab06/samples/people.txt --top 5
 ```
 Вывод:
+
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab06/cli_text_stats.jpg?raw=true)
+___
+**help**
+![](https://github.com/uswqs/python_labs/blob/main/images/lab06/cli_text_help.jpg?raw=true)
 ___
 
 ## Задание 2
@@ -148,5 +152,5 @@ python -m src.lab06.cli_convert csv2xlsx --in data/lab05/samples/cities.csv --ou
 Вывод в `data/lab06/out/cities.xlsx`:
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab06/cli_convert_csv2xlsx.jpg?raw=true)
 ___
-
-### help
+**help**
+![](https://github.com/uswqs/python_labs/blob/main/images/lab06/cli_convert_help.jpg?raw=true)
