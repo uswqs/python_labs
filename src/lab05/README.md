@@ -19,7 +19,7 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
     if json_file.suffix.lower() != ".json":
         raise ValueError("неверный тип файла, должен быть .json")
     if csv_file.suffix.lower() != ".csv":
-            raise ValueError("неверный тип файла, должен быть .csv")
+        raise ValueError("неверный тип файла, должен быть .csv")
 
     with open(json_file, "r", encoding="utf-8") as f:
         try:
