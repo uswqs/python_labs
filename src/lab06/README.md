@@ -55,7 +55,7 @@ if __name__=="__main__":
     main()
 ```
 ___
-**подкоманда cat**
+**Подкоманда cat**
 
 Аргументы: 
 - *"--input"* - входной файл
@@ -69,7 +69,7 @@ python -m src.lab06.cli_text cat --input data/lab06/samples/people.txt -n
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab06/cli_text_cat.jpg?raw=true)
 ___
 
-**подкоманда stats**
+**Подкоманда stats**
 
 Аргументы: 
 - *"--input"* - входной файл
@@ -125,7 +125,7 @@ if __name__=="__main__":
     main()
 ```
 ---
-**подкоманда json2csv**
+**Подкоманда json2csv**
 
 Вызов в терминале:
 ```
@@ -134,7 +134,7 @@ python -m src.lab06.cli_convert json2csv --in data/lab05/samples/people.json --o
 Вывод в `data/lab06/out/people.csv`:
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab06/cli_convert_json2csv.jpg?raw=true)
 ___
-**подкоманда csv2json**
+**Подкоманда csv2json**
 
 Вызов в терминале:
 ```
@@ -143,7 +143,7 @@ python -m src.lab06.cli_convert csv2json --in data/lab05/samples/people.csv --ou
 Вывод в `data/lab06/out/people.json`:
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab06/cli_convert_csv2json.jpg?raw=true)
 ___
-**подкоманда csv2xlsx**
+**Подкоманда csv2xlsx**
 
 Вызов в терминале:
 ```
