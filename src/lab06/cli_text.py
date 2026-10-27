@@ -9,12 +9,12 @@ def main():
     # подкоманда cat
     cat_parser = subparsers.add_parser("cat", help="Вывести содержимое файла")
     cat_parser.add_argument("--input", required=True, help="Входной файл")
-    cat_parser.add_argument("-n", action="store_true", help="Нумеровать строки")
+    cat_parser.add_argument("-n", action="store_true", help="Нужно ли нумеровать строки")
 
     # подкоманда stats
     stats_parser = subparsers.add_parser("stats", help="Частоты слов")
     stats_parser.add_argument("--input", required=True)
-    stats_parser.add_argument("--top", type=int, default=5)
+    stats_parser.add_argument("--top", type=int, default=5, help="Количество значений при выводе таблицы с частотами (по умолчанию - 5)")
 
     args = parser.parse_args()
 

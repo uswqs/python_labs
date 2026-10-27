@@ -14,12 +14,12 @@ def main():
     # подкоманда cat
     cat_parser = subparsers.add_parser("cat", help="Вывести содержимое файла")
     cat_parser.add_argument("--input", required=True, help="Входной файл")
-    cat_parser.add_argument("-n", action="store_true", help="Нумеровать строки")
+    cat_parser.add_argument("-n", action="store_true", help="Нужно ли нумеровать строки")
 
     # подкоманда stats
     stats_parser = subparsers.add_parser("stats", help="Частоты слов")
     stats_parser.add_argument("--input", required=True)
-    stats_parser.add_argument("--top", type=int, default=5)
+    stats_parser.add_argument("--top", type=int, default=5, help="Количество значений при выводе таблицы с частотами (по умолчанию - 5)")
 
     args = parser.parse_args()
 
@@ -92,22 +92,21 @@ import argparse
 from src.lab05.json_csv import json_to_csv, csv_to_json
 from src.lab05.csv_xlsx import csv_to_xlsx
 
-
 def main():
     parser = argparse.ArgumentParser(description="Конвертеры данных")
     sub = parser.add_subparsers(dest="command")
 
-    p1 = sub.add_parser("json2csv")
-    p1.add_argument("--in", dest="input", required=True)
-    p1.add_argument("--out", dest="output", required=True)
+    p1 = sub.add_parser("json2csv", help="Преобразует JSON-файл в CSV")
+    p1.add_argument("--in", dest="input", required=True, help="Входной файл")
+    p1.add_argument("--out", dest="output", required=True, help="Файл вывода")
 
-    p2 = sub.add_parser("csv2json")
-    p2.add_argument("--in", dest="input", required=True)
-    p2.add_argument("--out", dest="output", required=True)
+    p2 = sub.add_parser("csv2json"б, help="Преобразует CSV-файл в JSON")
+    p2.add_argument("--in", dest="input", required=True, help="Входной файл")
+    p2.add_argument("--out", dest="output", required=True, help="Файл вывода")
 
-    p3 = sub.add_parser("csv2xlsx")
-    p3.add_argument("--in", dest="input", required=True)
-    p3.add_argument("--out", dest="output", required=True)
+    p3 = sub.add_parser("csv2xlsx", help="Преобразует CSV-файл в XLSX")
+    p3.add_argument("--in", dest="input", required=True, help="Входной файл")
+    p3.add_argument("--out", dest="output", required=True, help="Файл вывода")
 
     args = parser.parse_args()
 
@@ -121,3 +120,33 @@ def main():
 if __name__=="__main__":
     main()
 ```
+---
+**подкоманда json2csv**
+
+Вызов в терминале:
+```
+python -m src.lab06.cli_convert json2csv --in data/lab05/samples/people.json --out data/lab06/out/people.csv
+```
+Вывод в `data/lab06/out/people.csv`:
+![](https://github.com/uswqs/python_labs/blob/main/images/lab06/cli_convert_json2csv.jpg?raw=true)
+___
+**подкоманда csv2json**
+
+Вызов в терминале:
+```
+python -m src.lab06.cli_convert csv2json --in data/lab05/samples/people.csv --out data/lab06/out/people.json
+```
+Вывод в `data/lab06/out/people.json`:
+![](https://github.com/uswqs/python_labs/blob/main/images/lab06/cli_convert_csv2json.jpg?raw=true)
+___
+**подкоманда csv2xlsx**
+
+Вызов в терминале:
+```
+python -m src.lab06.cli_convert csv2xlsx --in data/lab05/samples/cities.csv --out data/lab06/out/cities.xlsx
+```
+Вывод в `data/lab06/out/cities.xlsx`:
+![](https://github.com/uswqs/python_labs/blob/main/images/lab06/cli_convert_csv2xlsx.jpg?raw=true)
+___
+
+### help
