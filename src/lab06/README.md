@@ -66,6 +66,7 @@ ___
 python -m src.lab06.cli_text cat --input data/lab06/samples/people.txt -n
 ```
 Вывод:
+
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab06/cli_text_cat.jpg?raw=true)
 ___
 
@@ -84,6 +85,7 @@ python -m src.lab06.cli_text stats --input data/lab06/samples/people.txt --top 5
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab06/cli_text_stats.jpg?raw=true)
 ___
 **help**
+
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab06/cli_text_help.jpg?raw=true)
 ___
 
@@ -132,6 +134,7 @@ if __name__=="__main__":
 python -m src.lab06.cli_convert json2csv --in data/lab05/samples/people.json --out data/lab06/out/people.csv
 ```
 Вывод в `data/lab06/out/people.csv`:
+
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab06/cli_convert_json2csv.jpg?raw=true)
 ___
 **Подкоманда csv2json**
@@ -141,6 +144,7 @@ ___
 python -m src.lab06.cli_convert csv2json --in data/lab05/samples/people.csv --out data/lab06/out/people.json
 ```
 Вывод в `data/lab06/out/people.json`:
+
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab06/cli_convert_csv2json.jpg?raw=true)
 ___
 **Подкоманда csv2xlsx**
@@ -150,7 +154,9 @@ ___
 python -m src.lab06.cli_convert csv2xlsx --in data/lab05/samples/cities.csv --out data/lab06/out/cities.xlsx
 ```
 Вывод в `data/lab06/out/cities.xlsx`:
+
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab06/cli_convert_csv2xlsx.jpg?raw=true)
 ___
 **help**
+
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab06/cli_convert_help.jpg?raw=true)
