@@ -15,10 +15,10 @@ def bench_sorts():
         for func in (bubble_sort, insertion_sort, selection_sort):
             name = func.__name__
             if n <= 10_000:
-                time = timeit.timeit(lambda: func(data), number = 1)
-                rows.append(("sorting", n, name, f"{t:.6f}"))
+                t = timeit.timeit(lambda: func(data), number = 1)
+                rows.append(("sort", n, name, f"{t:.6f}"))
             else:
-                rows.append(("sorting", n, name, ">60"))
+                rows.append(("sort", n, name, ">60"))
     return rows
 
 def bench_search():

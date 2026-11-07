@@ -257,7 +257,9 @@ if __name__ == "__main__":
     print(f"OK, всего проверок {total_check}")
 ```
 Запуск: `python -m src.lab07.check `
+
 Вывод в терминал: 
+
 ![](https://github.com/uswqs/python_labs/blob/main/images/lab07/check.jpg?raw=true)
 
 
@@ -288,10 +290,10 @@ def bench_sorts():
         for func in (bubble_sort, insertion_sort, selection_sort):
             name = func.__name__
             if n <= 10_000:
-                time = timeit.timeit(lambda: func(data), number = 1)
-                rows.append(("sorting", n, name, f"{t:.6f}"))
+                t = timeit.timeit(lambda: func(data), number = 1)
+                rows.append(("sort", n, name, f"{t:.6f}"))
             else:
-                rows.append(("sorting", n, name, ">60"))
+                rows.append(("sort", n, name, ">60"))
     return rows
 ```
 ___
@@ -353,3 +355,13 @@ def main():
 ```
 ___
 Запуск: `python -m src.lab07.bench`
+
+Вывод в терминале: 
+
+![](https://github.com/uswqs/python_labs/blob/main/images/lab07/bench_terminal.jpg?raw=true)
+
+В CSV:
+
+![](https://github.com/uswqs/python_labs/blob/main/images/lab07/bench_csv.jpg?raw=true)
+
+## Выводы
