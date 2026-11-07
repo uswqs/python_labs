@@ -1,4 +1,3 @@
-import csv
 import timeit
 import random
 from src.lab04.io_txt_csv import write_csv

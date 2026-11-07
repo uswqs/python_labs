@@ -36,7 +36,7 @@ def check_search(trials=100):
     return trials
 
 def check_two_sum(trials=100):
-    """ сравнивает оба two_sum между собой
+    """ оба способа должны давать пару с нужной суммой или оба None
     
     при расхождении — AssertionError с данными, на которых разошлось"""
     for _ in range(trials):
