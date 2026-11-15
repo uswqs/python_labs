@@ -164,3 +164,109 @@ def students_to_json(students, path):
     with open(json_file, "w", encoding = "utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 ```
+Исходные данные (в блоке функции `main`):
+```python
+student1 = make_student("Иванов Иван Иванович", "2008-12-27", "БИВТ-25-6-15", 4.1)
+student2 = make_student("Николаев Андрей Викторович", "2008-03-18", "БИВТ-25-6-1", 3.5)
+students = [student1, student2]
+
+students_to_json(students, "data/lab08/students_output.json")
+```
+Результат в `students_output.json`:
+
+![](https://github.com/uswqs/python_labs/blob/main/images/lab08/students_output.jpg?raw=true)
+
+### students_from_json
+- проверяет, что json файл существует
+- открывает, сохраняет данные в `data`, проверяет, что данные есть, являются списком словарей
+- отдельно проверяет данные каждого студента: 
+    * если словарь битый, записывает в `skipped` номер студента (начиная с 1) и пояснение ошибки
+    * если данные верны, выводит в терминал данные (формат функции `format_student`)
+- в терминал выводится сколько было пропущено и почему
+```python
+def students_from_json(path) -> list[dict]:
+    json_file = Path(path)
+
+    if not json_file.exists():
+        raise FileNotFoundError("файл отсутствует")
+    if json_file.suffix.lower() != ".json":
+        raise ValueError("неверный тип файла, должен быть .json")
+
+    with open(json_file, "r", encoding="utf-8") as f:
+        try:
+            data = json.load(f)
+        except json.JSONDecodeError:
+            raise ValueError("Пустой JSON или неподдерживаемая структура")
+        
+    if not data:
+        raise ValueError("пустой json файл")
+    if not isinstance(data,list):
+        raise ValueError("неверный тип данных")
+
+    students = []
+    skipped = []
+    for number, raw in enumerate(data, start = 1):
+        if not isinstance(raw, dict):
+            skipped.append((number, "не словарь"))
+            continue  
+        try:        
+            students.append(student_from_dict(raw))
+        except (ValueError, TypeError) as e:
+            skipped.append((number, str(e)))
+
+    if skipped:
+        print(f"Пропущено записей: {len(skipped)} из {len(data)}")
+        for number, reason in skipped:
+            print(f"  №{number}: {reason}")
+        
+    return students
+```
+Исходные данные в `students_input`:
+```python
+[
+  {
+    "fio": "Пятрина Устина Юрьевна",
+    "birthdate": "2008-04-01",
+    "group": "БИВТ-26-6-4",
+    "gpa": 5
+  },
+  {
+    "fio": "Иванов Иван Иванович",
+    "birthdate": "2008-12-27",
+    "group": "БИВТ-26-6-15",
+    "gpa": 4.1
+  },
+  {
+    "fio": "Николаев Андрей Викторович",
+    "birthdate": "2008-03-18",
+    "group": "БИВТ-25-6-1",
+    "gpa": 3.5
+  }
+]
+```
+Исходные данные в `students_bad` (битые данные):
+``` python
+[
+  {
+    "fio": "Пятрина Устина Юрьевна",
+    "birthdate": "2008-04-01",
+    "group": "БИВТ-26-6-4",
+    "gpa": 5
+  },
+  {
+    "fio": "Иванов Иван Иванович",
+    "birthdate": "2008-15-27",
+    "group": "БИВТ-26-6-15",
+    "gpa": 4.1
+  },
+  {
+    "fio": "Николаев Андрей Викторович",
+    "birthdate": "2008-03-18",
+    "group": "БИВТ-25-6-1",
+    "gpa": 7
+  }
+]
+```
+Вывод в терминале:
+
+![](https://github.com/uswqs/python_labs/blob/main/images/lab08/students_from_json.jpg?raw=true)

@@ -58,7 +58,6 @@ def students_from_json(path) -> list[dict]:
 def main():
     student1 = make_student("Иванов Иван Иванович", "2008-12-27", "БИВТ-25-6-15", 4.1)
     student2 = make_student("Николаев Андрей Викторович", "2008-03-18", "БИВТ-25-6-1", 3.5)
-    # student3_bad = 
     students = [student1, student2]
 
     students_to_json(students, "data/lab08/students_output.json")
